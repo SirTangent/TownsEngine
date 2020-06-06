@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
 /**
 This class is a general class with useful function that can be used in more then one place.
 
@@ -11,7 +9,7 @@ public class ToolBelt {
      * This method clears the console by creating a lot of empty lines.
      */
     public static void clearScreen() {
-        for (int i = 0; i < 80; i++)
+        for (int i = 0; i < 300; i++)
             System.out.println();
     }
 
@@ -32,7 +30,7 @@ public class ToolBelt {
      * @param text The String you want to print out this way
      * @param newLine If it is set to true, after the text is done printing it will print a new line.
      */
-    public static void slowText(@NotNull String text, Boolean newLine) {
+    public static void slowText(String text, Boolean newLine) {
         for (int i = 0; i < text.length(); i++) {
             System.out.print(text.charAt(i));
             try {
@@ -57,10 +55,10 @@ public class ToolBelt {
 
     /**
      * This method will print out the line char by char at a fast speed.
-     * @param textThe String you want to print out this way
+     * @param text The String you want to print out this way
      * @param newLine If it is set to true, after the text is done printing it will print a new line.
      */
-    public static void fastText(@NotNull String text, Boolean newLine) {
+    public static void fastText( String text, Boolean newLine) {
         for (int i = 0; i < text.length(); i++) {
             System.out.print(text.charAt(i));
             try {
