@@ -1,6 +1,9 @@
 /**
  * This class is for keeping track fo the start scene and can run any scene.
- */
+ *
+ * @author Oamr Radwan
+ * @version 1.0.0
+ * */
 public class StoryPlayer {
     private Scene startScene;
 
