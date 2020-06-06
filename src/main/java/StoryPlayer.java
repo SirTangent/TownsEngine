@@ -1,0 +1,2 @@
+public class StoryPlayer {
+}
