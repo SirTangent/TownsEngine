@@ -8,7 +8,7 @@ public class Decision {
     private Scene nextScene;
     private String PrintableName;
 
-    public Decision(Scene nextScene, String name){
+    public Decision(String name, Scene nextScene){
         this(name);
         this.nextScene = nextScene;
     }

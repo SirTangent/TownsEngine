@@ -91,11 +91,10 @@ public class Scene implements Runnable{
                 } else {
                     break;
                 }
-            } catch (InputMismatchException ex){
+            } catch (InputMismatchException ex) {
                 System.out.print("Error: Must be a number!");
                 ToolBelt.sleep(1);
             }
-            input.close();
         }
         ToolBelt.clearScreen();
         this.options[number].getNextScene().run();
