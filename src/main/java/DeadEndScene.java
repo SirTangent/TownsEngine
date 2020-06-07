@@ -1,3 +1,9 @@
+/**
+ * This class is a sub class of scene and acts as a dead end in the story.
+ *
+ * @author Omar Radwan
+ * @version 1.0.0
+ */
 public class DeadEndScene extends Scene{
     public DeadEndScene(String desc, Scene prevScene) {
         super(desc);

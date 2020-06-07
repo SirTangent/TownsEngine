@@ -1,6 +1,12 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class is a sub class of scene and it acts as a save point for the player.
+ *
+ * @author Omar Radwan
+ * @version 1.0.0
+ */
 public class SavePoint extends Scene{
     private Scene nextScene;
 
