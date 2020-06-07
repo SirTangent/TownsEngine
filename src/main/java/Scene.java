@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @author Omar Radwan
  * @version 1.0.0
  */
-public class Scene implements Runnable{
+public class Scene implements Playable{
     private Decision[] options = new Decision[10];
     private int optionsPointer = 0;
     protected static Scene currSave = null;
@@ -97,7 +97,9 @@ public class Scene implements Runnable{
             }
         }
         ToolBelt.clearScreen();
-        this.options[number].getNextScene().run();
+        Decision temp = this.options[number-1];
+        Scene temps = temp.getNextScene();
+        temps.run();
     }
 
     /**
