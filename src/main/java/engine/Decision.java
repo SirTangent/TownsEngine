@@ -1,5 +1,7 @@
+package engine;
+
 /**
- * This is the Decision class. It holds links to other scenes
+ * This is the engine.Decision class. It holds links to other scenes
  *
  * @author Omar Radwan
  * @version 1.0.0

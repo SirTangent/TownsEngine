@@ -1,3 +1,5 @@
+package engine;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -6,11 +8,11 @@ import java.util.Scanner;
  * @author Omar Radwan
  * @version 1.0.0
  */
-public class Scene implements Playable{
+public class Scene implements Runnable{
     private Decision[] options = new Decision[10];
     private int optionsPointer = 0;
     protected static Scene currSave = null;
-    private String desc;
+    protected String desc;
 
     public Scene(String desc, Decision[] decisions){
         this(desc);
@@ -97,14 +99,12 @@ public class Scene implements Playable{
             }
         }
         ToolBelt.clearScreen();
-        Decision temp = this.options[number-1];
-        Scene temps = temp.getNextScene();
-        temps.run();
+        this.options[number-1].getNextScene().run();
     }
 
     /**
-     * This method adds Decision instances to the options array.
-     * @param decision a instance of Decision
+     * This method adds engine.Decision instances to the options array.
+     * @param decision a instance of engine.Decision
      */
     public void addDecision(Decision decision) {
         if (this.optionsPointer > 9) {

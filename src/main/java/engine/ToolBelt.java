@@ -1,3 +1,5 @@
+package engine;
+
 /**
 This class is a general class with useful function that can be used in more then one place.
 
