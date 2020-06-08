@@ -57,25 +57,19 @@ public class programmersDream {
         Decision walk2 = new Decision("Pick number 1", second);
         Decision walk3 = new Decision("No pick me. I'll walk you through the black hole", second);
         Decision walk4 = new Decision("Don't listen to any of them, pick me.", second);
-        Decision walk5 = new Decision("DICK AND BALL TORTURE (meme)", second);
         Decision walk6 = new Decision("it does'nt matter what you pick. we'll all die anyway.", second);
-        Decision walk7 = new Decision("Fuck oFf DicK baG (comedy see you get it)", second);
 
         tallGrassCon.addDecision(walk1);
         tallGrassCon.addDecision(walk2);
         tallGrassCon.addDecision(walk3);
         tallGrassCon.addDecision(walk4);
-        tallGrassCon.addDecision(walk5);
         tallGrassCon.addDecision(walk6);
-        tallGrassCon.addDecision(walk7);
 
         tallGrassConn.addDecision(walk1);
         tallGrassConn.addDecision(walk2);
         tallGrassConn.addDecision(walk3);
         tallGrassConn.addDecision(walk4);
-        tallGrassConn.addDecision(walk5);
         tallGrassConn.addDecision(walk6);
-        tallGrassConn.addDecision(walk7);
 
         Scene black = new Scene("You walk thought the black hole and everything is white");
         second.setNextScene(black);
