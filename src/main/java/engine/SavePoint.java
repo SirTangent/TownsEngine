@@ -31,7 +31,7 @@ public class SavePoint extends Scene{
     }
 
     /**
-     * This class runs the scene
+     * This class runs the scene and will ask if you want to save. If you choose yes, you save.
      * @see Scene
      */
     @Override
