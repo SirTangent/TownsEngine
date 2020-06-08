@@ -2,9 +2,10 @@ package engine;
 
 import java.util.Scanner;
 /**
- * This class is for keeping track of the start scene and can run any scene.
+ * This class is for keeping track of basic info like engine info and story info. it also keeps track of the Start scene.
  *
  * @author Omar Radwan
+ * @author Wyatt Phillips
  * @version 1.0.0
  * */
 public class StoryPlayer {
@@ -20,20 +21,34 @@ public class StoryPlayer {
         StoryPlayer.desc = desc;
     }
 
+    /**
+     * This method will start the story and play the startScene scene.
+     */
     public void playLoop() {
         this.printInfo();
         StoryPlayer.startScene.run();
     }
 
+    /**
+     * This method will play the scene you give it.
+     * @param scene A Scene or a class that extends Scene.
+     */
     public void playScene(Scene scene){
         this.printInfo();
         scene.run();
     }
 
+    /**
+     * This method gets the StartScene.
+     * @return the startScene scene.
+     */
     public static Scene getStartScene(){
         return StoryPlayer.startScene;
     }
 
+    /**
+     * This class prints out Engine info and Story info.
+     */
     private void printInfo(){
         Scanner input = new Scanner(System.in);
         ToolBelt.slowText("TownsEngine");
@@ -47,27 +62,11 @@ public class StoryPlayer {
         ToolBelt.slowText(StoryPlayer.title);
         ToolBelt.slowText("By: " + StoryPlayer.author);
         System.out.println();
-        this.displayText(StoryPlayer.desc, 70);
+        ToolBelt.displayText(StoryPlayer.desc, 70);
         System.out.println();
         ToolBelt.slowText("Type anything to start...");
         input.next();
         ToolBelt.clearScreen();
     }
 
-    private void displayText(String text, int lineLength){
-        while (true) {
-            if (text.length() > lineLength) {
-                for (int i = lineLength; i > 0; i--) {
-                    if (text.charAt(i) == ' ') {
-                        ToolBelt.slowText(text.substring(0, i));
-                        text = text.substring(i + 1, text.length());
-                        break;
-                    }
-                }
-            } else {
-                ToolBelt.slowText(text);
-                return;
-            }
-        }
-    }
 }

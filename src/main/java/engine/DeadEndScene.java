@@ -1,10 +1,18 @@
 package engine;
 
-public class DeadendScene extends Scene{
+/**
+ * This class is a subclass of Scene. This acts as a dead end in the story.
+ * @see Scene
+ *
+ * @author Omar Radwan
+ * @author Wyatt Phillips
+ * @version 1.0.0
+ */
+public class DeadEndScene extends Scene{
     private boolean startCheck = false;
     private boolean saveCheck = false;
     private Decision backToSave = new Decision("Go back to last Save", Scene.currSave);
-    public DeadendScene(String desc, Scene prevScene) {
+    public DeadEndScene(String desc, Scene prevScene) {
         super(desc);
 
         if (StoryPlayer.getStartScene() != null && this.startCheck == false) {
@@ -23,6 +31,10 @@ public class DeadendScene extends Scene{
         super.addDecision(backOne);
     }
 
+    /**
+     * This method runs the scene and says you hit a dead end and show the options
+     * @see Scene
+     */
     @Override
     public void run() {
         if (StoryPlayer.getStartScene() != null && this.startCheck == false) {

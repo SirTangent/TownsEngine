@@ -3,9 +3,10 @@ package engine;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
- * This class can run a single scene. You can only have upto 10 options in a given scene
+ * This class can run a single scene. It will print out the desc and then all the options. You can only have upto 10 options in a given scene.
  *
  * @author Omar Radwan
+ * @author Wyatt Phillips
  * @version 1.0.0
  */
 public class Scene implements Runnable{
@@ -17,7 +18,7 @@ public class Scene implements Runnable{
     public Scene(String desc, Decision[] decisions){
         this(desc);
         if (decisions.length > 10) {
-            throw new IllegalStateException("Error: each scene can only support 10 or less options");
+            throw new IllegalStateException("Error: each scene can only support 10 or less options!");
         }
 
         for (Decision temp: decisions) {
@@ -28,7 +29,7 @@ public class Scene implements Runnable{
     public Scene(String desc, Decision decision){
         this(desc);
         if (this.optionsPointer > 9) {
-            throw new IllegalStateException("Error: can not add another option as each scene can only support 10 or less options");
+            throw new IllegalStateException("Error: can not add another option as each scene can only support 10 or less options!");
         }
 
         this.options[this.optionsPointer] = decision;
@@ -40,15 +41,15 @@ public class Scene implements Runnable{
     }
 
     /**
-     * This method runs and will display stuff and ask for user input
+     * This method runs and will display stuff and ask for user input.
      */
     @Override
     public void run() {
         if (this.optionsPointer == 0) {
-            throw new IllegalStateException("Error: Can not run a scene that has no options.");
+            throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
 
-        displayText(this.desc, 70);
+        ToolBelt.displayText(this.desc, 70);
         System.out.println();
         ToolBelt.sleep(2);
         ToolBelt.slowText("What would you like to do?");
@@ -57,14 +58,14 @@ public class Scene implements Runnable{
     }
 
     /**
-     * This method runs and will display stuff and ask for user input
+     * This method runs and will display stuff and ask for user input.
      */
     protected void run(String text) {
         if (this.optionsPointer == 0) {
-            throw new IllegalStateException("Error: Can not run a scene that has no options.");
+            throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
 
-        displayText(this.desc, 70);
+        ToolBelt.displayText(this.desc, 70);
         System.out.println();
         ToolBelt.sleep(2);
         ToolBelt.slowText(text);
@@ -72,10 +73,13 @@ public class Scene implements Runnable{
         displayOptions();
     }
 
+    /**
+     * This will display the options and ask for user input.
+     */
     private void displayOptions() {
         for (int i = 0; i < this.optionsPointer; i++) {
             int temp = i + 1;
-            displayText(temp + "|" + this.options[i].getName(), 70);
+            ToolBelt.displayText(temp + "|" + this.options[i].getName(), 70);
         }
 
         int number = 0;
@@ -104,36 +108,14 @@ public class Scene implements Runnable{
 
     /**
      * This method adds engine.Decision instances to the options array.
-     * @param decision a instance of engine.Decision
+     * @param decision a instance of engine.Decision.
      */
     public void addDecision(Decision decision) {
         if (this.optionsPointer > 9) {
-            throw new IllegalStateException("Error: can not add another option as each scene can only support 10 or less options");
+            throw new IllegalStateException("Error: can not add another option as each scene can only support 10 or less options!");
         }
 
         this.options[this.optionsPointer] = decision;
         this.optionsPointer++;
-    }
-
-    /**
-     * This method displays text nicely into the terminal.
-     * @param text a string of text you want to display
-     * @param lineLength how many char you want per line of the terminal
-     */
-    protected void displayText(String text, int lineLength){
-        while (true) {
-            if (text.length() > lineLength) {
-                for (int i = lineLength; i > 0; i--) {
-                    if (text.charAt(i) == ' ') {
-                        ToolBelt.slowText(text.substring(0, i));
-                        text = text.substring(i + 1, text.length());
-                        break;
-                    }
-                }
-            } else {
-                ToolBelt.slowText(text);
-                return;
-            }
-        }
     }
 }

@@ -1,9 +1,10 @@
 package engine;
 
 /**
- * This is the engine.Decision class. It holds links to other scenes
+ * This is the engine's Decision class. It is used when you want to make a decision in a scene.
  *
  * @author Omar Radwan
+ * @author Wyatt Phillips
  * @version 1.0.0
  */
 public class Decision {
@@ -24,16 +25,20 @@ public class Decision {
     }
 
     /**
-     * This returns the nextScene field. Will throw a IllegalStateException if the nextScene field is null
-     * @return The nextScene field
+     * This returns the nextScene field. Will throw a IllegalStateException if the nextScene field is null.
+     * @return The nextScene field.
      */
     public Scene getNextScene() {
         if (this.nextScene == null) {
-            throw new IllegalStateException("Error: Can not get next scene because it is null");
+            throw new IllegalStateException("Error: Can not get next scene because it is null!");
         }
         return this.nextScene;
     }
 
+    /**
+     * This is set the nextScene scene to the scene input.
+     * @param scene Scene or class that extends Scene that you want to be the next scene.
+     */
     public void setNextScene(Scene scene){
         this.nextScene = scene;
     }

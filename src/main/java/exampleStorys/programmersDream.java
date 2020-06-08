@@ -1,12 +1,18 @@
 package exampleStorys;
 import engine.*;
 
+/**
+ * This is my test story to test if my code is working
+ *
+ * @author Omar Radwan
+ * @version 1.0.0
+ */
 public class programmersDream {
     public static void main (String[] args){
         /*
-        WARNING: DONT NOT READ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        WARNING: DONT NOT READ
+        jk I dont care
          */
-
         Decision wakeup = new Decision("Wake up");
         Decision Die = new Decision("Die");
         Scene start = new Scene("This is the start");
@@ -21,7 +27,7 @@ public class programmersDream {
 
         Die.setNextScene(_Die);
 
-        DeadendScene deadEnd = new DeadendScene("You are pleased", _Die);
+        DeadEndScene deadEnd = new DeadEndScene("You are pleased", _Die);
 
         good.setNextScene(deadEnd);
 
@@ -36,7 +42,7 @@ public class programmersDream {
         wake_up.addDecision(lookAtGrass);
         wake_up.addDecision(lookAtSky);
 
-        DeadendScene skyBurn = new DeadendScene("You look up at the sky and it blinds you.", wake_up);
+        DeadEndScene skyBurn = new DeadEndScene("You look up at the sky and it blinds you.", wake_up);
         lookAtSky.setNextScene(skyBurn);
 
         Scene tallGrass = new Scene("You feel the tall grass. Careful, it might feel you back.");
@@ -78,7 +84,7 @@ public class programmersDream {
         black.addDecision(makeU);
         black.addDecision(die2);
 
-        DeadendScene finallys = new DeadendScene("You tried to play god and god did'nt like it so he edited to code so you die.", black);
+        DeadEndScene finallys = new DeadEndScene("You tried to play god and god did'nt like it so he edited to code so you die.", black);
         makeU.setNextScene(finallys);
 
         //-------------------------------------------------------------------------

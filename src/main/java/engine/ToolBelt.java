@@ -1,12 +1,12 @@
 package engine;
 
 /**
-This class is a general class with useful function that can be used in more then one place.
+This class is a general class with useful function that can be used.
 
 @author Omar Radwan
-@version 1.0.0
+@version 1.1.0
  */
-public class ToolBelt {
+class ToolBelt {
     /**
      * This method clears the console by creating a lot of empty lines.
      */
@@ -16,8 +16,8 @@ public class ToolBelt {
     }
 
     /**
-     * This method will make the program stop of a set number of seconds
-     * @param sec The number of second that you would like the program to stop for
+     * This method will make the program stop of a set number of seconds.
+     * @param sec The number of second that you would like the program to stop for.
      */
     public static void sleep(int sec) {
         try {
@@ -29,7 +29,7 @@ public class ToolBelt {
 
     /**
      * This method will print out the line char by char at a slow speed.
-     * @param text The String you want to print out this way
+     * @param text The String you want to print out this way.
      * @param newLine If it is set to true, after the text is done printing it will print a new line.
      */
     public static void slowText(String text, Boolean newLine) {
@@ -57,7 +57,7 @@ public class ToolBelt {
 
     /**
      * This method will print out the line char by char at a fast speed.
-     * @param text The String you want to print out this way
+     * @param text The String you want to print out this way.
      * @param newLine If it is set to true, after the text is done printing it will print a new line.
      */
     public static void fastText( String text, Boolean newLine) {
@@ -84,13 +84,36 @@ public class ToolBelt {
     }
 
     /**
-     * This will pick a random number between the min and max values
-     * @param min The number that is the min
-     * @param max The number that is the max
-     * @return Returns a random int between the two ranges
+     * This will pick a random number between the min and max values.
+     * @param min The number that is the min.
+     * @param max The number that is the max.
+     * @return Returns a random int between the two ranges.
      */
     public static int random(int min, int max) {
         int range = (max - min) + 1;
         return (int) (Math.random() * range) + min;
+    }
+
+    /**
+     * This method will print out the text given char by char until it reaches the lineLength and then
+     * moves down a line. It will go to the closes space so it doesnt cut of words.
+     * @param text The String you want printed out.
+     * @param lineLength How many char you want each line.
+     */
+    public static void displayText(String text, int lineLength){
+        while (true) {
+            if (text.length() > lineLength) {
+                for (int i = lineLength; i > 0; i--) {
+                    if (text.charAt(i) == ' ') {
+                        ToolBelt.slowText(text.substring(0, i));
+                        text = text.substring(i + 1, text.length());
+                        break;
+                    }
+                }
+            } else {
+                ToolBelt.slowText(text);
+                return;
+            }
+        }
     }
 }

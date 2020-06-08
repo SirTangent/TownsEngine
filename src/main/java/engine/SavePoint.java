@@ -3,6 +3,14 @@ package engine;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This is a sub class of Scene. This class acts as a save point and will save the game.
+ * @see Scene
+ *
+ * @author Omar Radwan
+ * @author Wyatt Phillips
+ * @version 1.0.0
+ */
 public class SavePoint extends Scene{
     private Scene nextScene;
     public SavePoint(String desc, Scene nextScene) {
@@ -14,16 +22,24 @@ public class SavePoint extends Scene{
         super(desc);
     }
 
+    /**
+     *  This method sets the nextScene field.
+     * @param scene The Scene or class that extends scene that you want tobe the next scene.
+     */
     public void setNextScene(Scene scene){
         this.nextScene = scene;
     }
 
+    /**
+     * This class runs the scene
+     * @see Scene
+     */
     @Override
     public void run() {
         if (this.nextScene == null) {
             throw new IllegalStateException("Error: Can not run scene as nextScene is null!");
         }
-        displayText(super.desc, 70);
+        ToolBelt.displayText(super.desc, 70);
         System.out.println();
         ToolBelt.sleep(2);
 
