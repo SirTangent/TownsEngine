@@ -6,27 +6,36 @@ import java.util.Scanner;
  *
  * @author Omar Radwan
  * @author Wyatt Phillips
- * @version 1.0.0
+ * @version 1.1.0
  * */
 public class StoryPlayer {
-    private static Scene startScene = null;
-    private static String title= null;
-    private static String author= null;
-    private static String desc = null;
+    private Scene startScene = null;
+    private String title= null;
+    private String author= null;
+    private String desc = null;
 
-    public StoryPlayer(Scene startScene, String title, String desc,String author){
-        StoryPlayer.startScene = startScene;
-        StoryPlayer.title = title;
-        StoryPlayer.author = author;
-        StoryPlayer.desc = desc;
+    public StoryPlayer(String title, String desc,String author, Scene startScene){
+        this.startScene = startScene;
+        this.title = title;
+        this.author = author;
+        this.desc = desc;
+    }
+
+    public StoryPlayer(String title, String desc,String author){
+        this.title = title;
+        this.author = author;
+        this.desc = desc;
     }
 
     /**
      * This method will start the story and play the startScene scene.
      */
     public void playLoop() {
+        if (this.startScene == null) {
+            throw new IllegalStateException("Error: There is no start scene!");
+        }
         this.printInfo();
-        StoryPlayer.startScene.run();
+        this.startScene.run();
     }
 
     /**
@@ -42,9 +51,10 @@ public class StoryPlayer {
      * This method gets the StartScene.
      * @return the startScene scene.
      */
-    public static Scene getStartScene(){
-        return StoryPlayer.startScene;
+    public Scene getStartScene(){
+        return this.startScene;
     }
+    public void setStartScene(Scene scene) {this.startScene = scene;}
 
     /**
      * This class prints out Engine info and Story info.
@@ -59,10 +69,10 @@ public class StoryPlayer {
         input.next();
         ToolBelt.clearScreen();
 
-        ToolBelt.slowText(StoryPlayer.title);
-        ToolBelt.slowText("By: " + StoryPlayer.author);
+        ToolBelt.slowText(this.title);
+        ToolBelt.slowText("By: " + this.author);
         System.out.println();
-        ToolBelt.displayText(StoryPlayer.desc, 70);
+        ToolBelt.displayText(this.desc, 70);
         System.out.println();
         ToolBelt.slowText("Type anything to start...");
         input.next();

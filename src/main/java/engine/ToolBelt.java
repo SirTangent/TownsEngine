@@ -4,9 +4,9 @@ package engine;
 This class is a general class with useful function that can be used.
 
 @author Omar Radwan
-@version 1.1.0
+@version 1.1.1
  */
-class ToolBelt {
+ class ToolBelt {
     /**
      * This method clears the console by creating a lot of empty lines.
      */
@@ -70,7 +70,7 @@ class ToolBelt {
             }
         }
 
-        if (newLine = true){
+        if (newLine){
             System.out.println();
         }
     }

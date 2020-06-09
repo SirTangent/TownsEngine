@@ -6,22 +6,24 @@ package engine;
  *
  * @author Omar Radwan
  * @author Wyatt Phillips
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class DeadEndScene extends Scene{
+    private StoryPlayer player = null;
     private boolean startCheck = false;
     private boolean saveCheck = false;
     private Decision backToSave = new Decision("Go back to last Save", Scene.currSave);
-    public DeadEndScene(String desc, Scene prevScene) {
+    public DeadEndScene(String desc, Scene prevScene, StoryPlayer player) {
         super(desc);
+        this.player = player;
 
-        if (StoryPlayer.getStartScene() != null && this.startCheck == false) {
-            Decision backToStart = new Decision("Go back to the start", StoryPlayer.getStartScene());
+        if (this.player.getStartScene() != null && !this.startCheck) {
+            Decision backToStart = new Decision("Go back to the start", this.player.getStartScene());
             super.addDecision(backToStart);
             this.startCheck = true;
         }
 
-        if (Scene.currSave != null && this.saveCheck == false) {
+        if (Scene.currSave != null && !this.saveCheck) {
             Decision backToSave = new Decision("Go back to last Save", Scene.currSave);
             super.addDecision(backToSave);
             this.saveCheck = true;
@@ -37,8 +39,8 @@ public class DeadEndScene extends Scene{
      */
     @Override
     public void run() {
-        if (StoryPlayer.getStartScene() != null && this.startCheck == false) {
-            Decision backToStart = new Decision("Go back to the start", StoryPlayer.getStartScene());
+        if (player.getStartScene() != null && this.startCheck == false) {
+            Decision backToStart = new Decision("Go back to the start", this.player.getStartScene());
             super.addDecision(backToStart);
             this.startCheck = true;
         }

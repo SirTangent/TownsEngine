@@ -13,12 +13,14 @@ public class programmersDream {
         WARNING: DONT NOT READ
         jk I dont care
          */
+        StoryPlayer player = new StoryPlayer( "Programmers' Masterpiece","Get ready for a ride cus this is the story I used to check my code and make sure it was working. Hold onto your fucking hats cus if this makes any sense your fucking lucky. Maybe grab a drink or teo before starting just to get though it. Good luck","Omar Radwan");
+
         Decision wakeup = new Decision("Wake up");
         Decision Die = new Decision("Die");
         Scene start = new Scene("This is the start");
         start.addDecision(wakeup);
         start.addDecision(Die);
-
+        player.setStartScene(start);
 
         Decision good = new Decision("Good");
         Scene _Die = new Scene("you have died");
@@ -27,7 +29,7 @@ public class programmersDream {
 
         Die.setNextScene(_Die);
 
-        DeadEndScene deadEnd = new DeadEndScene("You are pleased", _Die);
+        DeadEndScene deadEnd = new DeadEndScene("You are pleased", _Die, player);
 
         good.setNextScene(deadEnd);
 
@@ -42,7 +44,7 @@ public class programmersDream {
         wake_up.addDecision(lookAtGrass);
         wake_up.addDecision(lookAtSky);
 
-        DeadEndScene skyBurn = new DeadEndScene("You look up at the sky and it blinds you.", wake_up);
+        DeadEndScene skyBurn = new DeadEndScene("You look up at the sky and it blinds you.", wake_up, player);
         lookAtSky.setNextScene(skyBurn);
 
         Scene tallGrass = new Scene("You feel the tall grass. Careful, it might feel you back.");
@@ -84,12 +86,11 @@ public class programmersDream {
         black.addDecision(makeU);
         black.addDecision(die2);
 
-        DeadEndScene finallys = new DeadEndScene("You tried to play god and god did'nt like it so he edited to code so you die.", black);
+        DeadEndScene finallys = new DeadEndScene("You tried to play god and god did'nt like it so he edited to code so you die.", black, player);
         makeU.setNextScene(finallys);
 
         //-------------------------------------------------------------------------
 
-        StoryPlayer player = new StoryPlayer(start, "Programmers' Masterpiece","Get ready for a ride cus this is the story I used to check my code and make sure it was working. Hold onto your fucking hats cus if this makes any sense your fucking lucky. Maybe grab a drink or teo before starting just to get though it. Good luck","Omar Radwan");
         player.playLoop();
     }
 }
