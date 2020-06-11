@@ -9,13 +9,13 @@ import java.util.Scanner;
  * @version 1.1.0
  * */
 public class StoryPlayer {
-    private Scene startScene = null;
+    private Branch startBranch = null;
     private String title= null;
     private String author= null;
     private String desc = null;
 
-    public StoryPlayer(String title, String desc,String author, Scene startScene){
-        this.startScene = startScene;
+    public StoryPlayer(String title, String desc,String author, Branch startBranch){
+        this.startBranch = startBranch;
         this.title = title;
         this.author = author;
         this.desc = desc;
@@ -28,33 +28,33 @@ public class StoryPlayer {
     }
 
     /**
-     * This method will start the story and play the startScene scene.
+     * This method will start the story and play the startBranch scene.
      */
     public void playLoop() {
-        if (this.startScene == null) {
+        if (this.startBranch == null) {
             throw new IllegalStateException("Error: There is no start scene!");
         }
         this.printInfo();
-        this.startScene.play();
+        this.startBranch.play();
     }
 
     /**
-     * This method will play the scene you give it.
-     * @param scene A Scene or a class that extends Scene.
+     * This method will play the branch you give it.
+     * @param branch A Branch or a class that extends Branch.
      */
-    public void playScene(Scene scene){
+    public void playScene(Branch branch){
         this.printInfo();
-        scene.play();
+        branch.play();
     }
 
     /**
      * This method gets the StartScene.
-     * @return the startScene scene.
+     * @return the startBranch scene.
      */
-    public Scene getStartScene(){
-        return this.startScene;
+    public Branch getStartBranch(){
+        return this.startBranch;
     }
-    public void setStartScene(Scene scene) {this.startScene = scene;}
+    public void setStartBranch(Branch branch) {this.startBranch = branch;}
 
     /**
      * This class prints out Engine info and Story info.

@@ -10,12 +10,12 @@ import java.util.Scanner;
  * @author Wyatt Phillips
  * @version 1.0.0
  */
-public class Scene implements Playable{
+public class Branch implements Playable{
     private ArrayList<Decision> options = new ArrayList<Decision>();
-    protected static Scene currSave = null;
+    protected static Branch currSave = null;
     protected String desc;
 
-    public Scene(String desc, Decision[] decisions){
+    public Branch(String desc, Decision[] decisions){
         this(desc);
 
         for (Decision temp: decisions) {
@@ -23,13 +23,13 @@ public class Scene implements Playable{
         }
     }
 
-    public Scene(String desc, Decision decision){
+    public Branch(String desc, Decision decision){
         this(desc);
 
         this.options.add(decision);
     }
 
-    public Scene(String desc){
+    public Branch(String desc){
         this.desc = desc;
     }
 
@@ -98,7 +98,7 @@ public class Scene implements Playable{
             }
         }
         ToolBelt.clearScreen();
-        this.options.get(number-1).getNextScene().play();
+        this.options.get(number-1).getNextBranch().play();
     }
 
     /**

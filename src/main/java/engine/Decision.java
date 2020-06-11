@@ -8,12 +8,12 @@ package engine;
  * @version 1.0.0
  */
 public class Decision {
-    private Scene nextScene;
+    private Branch nextBranch;
     private String PrintableName;
 
-    public Decision(String name, Scene nextScene){
+    public Decision(String name, Branch nextBranch){
         this(name);
-        this.nextScene = nextScene;
+        this.nextBranch = nextBranch;
     }
 
     public Decision(String name){
@@ -25,21 +25,21 @@ public class Decision {
     }
 
     /**
-     * This returns the nextScene field. Will throw a IllegalStateException if the nextScene field is null.
-     * @return The nextScene field.
+     * This returns the nextBranch field. Will throw a IllegalStateException if the nextBranch field is null.
+     * @return The nextBranch field.
      */
-    public Scene getNextScene() {
-        if (this.nextScene == null) {
+    public Branch getNextBranch() {
+        if (this.nextBranch == null) {
             throw new IllegalStateException("Error: Can not get next scene because it is null!");
         }
-        return this.nextScene;
+        return this.nextBranch;
     }
 
     /**
-     * This is set the nextScene scene to the scene input.
-     * @param scene Scene or class that extends Scene that you want to be the next scene.
+     * This is set the nextBranch branch to the branch input.
+     * @param branch Branch or class that extends Branch that you want to be the next branch.
      */
-    public void setNextScene(Scene scene){
-        this.nextScene = scene;
+    public void setNextBranch(Branch branch){
+        this.nextBranch = branch;
     }
 }

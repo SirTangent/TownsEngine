@@ -13,52 +13,55 @@ public class programmersDream {
         WARNING: DONT NOT READ
         jk I dont care
          */
-
         StoryPlayer player = new StoryPlayer( "Programmers' Masterpiece","Get ready for a ride cus this is the story I used to check my code and make sure it was working. Hold onto your fucking hats cus if this makes any sense your fucking lucky. Maybe grab a drink or teo before starting just to get though it. Good luck","Omar Radwan");
+
+        Text testering = new Text("This is some text without a desigen");
 
         Decision wakeup = new Decision("Wake up");
         Decision Die = new Decision("Die");
-        Scene start = new Scene("This is the start");
+        Branch start = new Branch("This is the start");
         start.addDecision(wakeup);
         start.addDecision(Die);
-        player.setStartScene(start);
+        player.setStartBranch(start);
 
         Decision good = new Decision("Good");
-        Scene _Die = new Scene("you have died");
+        Branch _Die = new Branch("you have died");
         _Die.addDecision(good);
         _Die.addDecision(good);
 
-        Die.setNextScene(_Die);
+        Die.setNextBranch(_Die);
 
-        DeadEndScene deadEnd = new DeadEndScene("You are pleased", _Die, player);
+        DeadEndBranch deadEnd = new DeadEndBranch("You are pleased", _Die, player);
 
-        good.setNextScene(deadEnd);
+        good.setNextBranch(deadEnd);
 
         //-------------------------------------------------------------------------
 
-        Scene wake_up = new Scene("You wake up and see a blue sky");
+
+        Branch wake_up = new Branch("You wake up and see a blue sky");
         SavePoint firstSave = new SavePoint("This is the first Save point.", wake_up);
-        wakeup.setNextScene(firstSave);
+        wakeup.setNextBranch(testering);
+        testering.setNextBranch(firstSave);
 
         Decision lookAtSky = new Decision("Look up at the sky");
         Decision lookAtGrass = new Decision("Feel the nice tall grass");
         wake_up.addDecision(lookAtGrass);
         wake_up.addDecision(lookAtSky);
 
-        DeadEndScene skyBurn = new DeadEndScene("You look up at the sky and it blinds you.", wake_up, player);
-        lookAtSky.setNextScene(skyBurn);
+        DeadEndBranch skyBurn = new DeadEndBranch("You look up at the sky and it blinds you.", wake_up, player);
+        lookAtSky.setNextBranch(skyBurn);
 
-        Scene tallGrass = new Scene("You feel the tall grass. Careful, it might feel you back.");
-        lookAtGrass.setNextScene(tallGrass);
+        Branch tallGrass = new Branch("You feel the tall grass. Careful, it might feel you back.");
+        lookAtGrass.setNextBranch(tallGrass);
         Decision stop = new Decision("Stop");
         Decision dont = new Decision("Don't Stop");
         tallGrass.addDecision(stop);
         tallGrass.addDecision(dont);
 
-        Scene tallGrassCon = new Scene("You can't stop. it feels to nice. Suddenly, a black hole opens up.");
-        Scene tallGrassConn = new Scene("You don't want to stop. Suddenly, a black hole opens up.");
-        stop.setNextScene(tallGrassCon);
-        dont.setNextScene(tallGrassConn);
+        Branch tallGrassCon = new Branch("You can't stop. it feels to nice. Suddenly, a black hole opens up.");
+        Branch tallGrassConn = new Branch("You don't want to stop. Suddenly, a black hole opens up.");
+        stop.setNextBranch(tallGrassCon);
+        dont.setNextBranch(tallGrassConn);
 
         SavePoint second = new SavePoint("You reached a second save point. I have no idea how you made it this far.");
 
@@ -80,15 +83,15 @@ public class programmersDream {
         tallGrassConn.addDecision(walk4);
         tallGrassConn.addDecision(walk6);
 
-        Scene black = new Scene("You walk thought the black hole and everything is white");
-        second.setNextScene(black);
+        Branch black = new Branch("You walk thought the black hole and everything is white");
+        second.setNextBranch(black);
         Decision makeU = new Decision("Make the universe (your god now)");
         Decision die2 = new Decision("I Still just want to die cus i'm a worthless piece of shit", _Die);
         black.addDecision(makeU);
         black.addDecision(die2);
 
-        DeadEndScene finallys = new DeadEndScene("You tried to play god and god did'nt like it so he edited to code so you die.", black, player);
-        makeU.setNextScene(finallys);
+        DeadEndBranch finallys = new DeadEndBranch("You tried to play god and god did'nt like it so he edited to code so you die.", black, player);
+        makeU.setNextBranch(finallys);
 
         //-------------------------------------------------------------------------
 
