@@ -13,6 +13,7 @@ public class programmersDream {
         WARNING: DONT NOT READ
         jk I dont care
          */
+
         StoryPlayer player = new StoryPlayer( "Programmers' Masterpiece","Get ready for a ride cus this is the story I used to check my code and make sure it was working. Hold onto your fucking hats cus if this makes any sense your fucking lucky. Maybe grab a drink or teo before starting just to get though it. Good luck","Omar Radwan");
 
         Decision wakeup = new Decision("Wake up");
