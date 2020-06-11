@@ -1,5 +1,6 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -10,16 +11,12 @@ import java.util.Scanner;
  * @version 1.0.0
  */
 public class Scene implements Playable{
-    private Decision[] options = new Decision[10];
-    private int optionsPointer = 0;
+    private ArrayList<Decision> options = new ArrayList<Decision>();
     protected static Scene currSave = null;
     protected String desc;
 
     public Scene(String desc, Decision[] decisions){
         this(desc);
-        if (decisions.length > 10) {
-            throw new IllegalStateException("Error: each scene can only support 10 or less options!");
-        }
 
         for (Decision temp: decisions) {
             this.addDecision(temp);
@@ -28,12 +25,8 @@ public class Scene implements Playable{
 
     public Scene(String desc, Decision decision){
         this(desc);
-        if (this.optionsPointer > 9) {
-            throw new IllegalStateException("Error: can not add another option as each scene can only support 10 or less options!");
-        }
 
-        this.options[this.optionsPointer] = decision;
-        this.optionsPointer++;
+        this.options.add(decision);
     }
 
     public Scene(String desc){
@@ -45,7 +38,7 @@ public class Scene implements Playable{
      */
     @Override
     public void play() {
-        if (this.optionsPointer == 0) {
+        if (this.options.get(0) == null) {
             throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
 
@@ -62,7 +55,7 @@ public class Scene implements Playable{
      * @param text A description of the scene that will be printed.
      */
     protected void play(String text) {
-        if (this.optionsPointer == 0) {
+        if (this.options.size() == 0) {
             throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
 
@@ -78,12 +71,13 @@ public class Scene implements Playable{
      * This will display the options and ask for user input.
      */
     private void displayOptions() {
-        for (int i = 0; i < this.optionsPointer; i++) {
-            int temp = i + 1;
-            ToolBelt.displayText(temp + "|" + this.options[i].getName(), 70);
+        int count = 1;
+        for(Decision temp : this.options){
+            ToolBelt.displayText(count + "|" + temp.getName(), 70);
+            count++;
         }
 
-        int number = 0;
+        int number;
         while(true){
             System.out.println();
             System.out.print(">");
@@ -92,7 +86,7 @@ public class Scene implements Playable{
             try{
                 number = input.nextInt();
 
-                if (number < 1 || number > this.optionsPointer) {
+                if (number < 1 || number > this.options.size()) {
                     System.out.print("Error: Not a valid option!");
                     ToolBelt.sleep(1);
                 } else {
@@ -104,7 +98,7 @@ public class Scene implements Playable{
             }
         }
         ToolBelt.clearScreen();
-        this.options[number-1].getNextScene().play();
+        this.options.get(number-1).getNextScene().play();
     }
 
     /**
@@ -112,11 +106,6 @@ public class Scene implements Playable{
      * @param decision a instance of engine.Decision.
      */
     public void addDecision(Decision decision) {
-        if (this.optionsPointer > 9) {
-            throw new IllegalStateException("Error: can not add another option as each scene can only support 10 or less options!");
-        }
-
-        this.options[this.optionsPointer] = decision;
-        this.optionsPointer++;
+        this.options.add(decision);
     }
 }
