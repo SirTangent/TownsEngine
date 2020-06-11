@@ -35,7 +35,7 @@ public class SavePoint extends Scene{
      * @see Scene
      */
     @Override
-    public void run() {
+    public void play() {
         if (this.nextScene == null) {
             throw new IllegalStateException("Error: Can not run scene as nextScene is null!");
         }
@@ -72,6 +72,6 @@ public class SavePoint extends Scene{
         if (number == 1) {
             Scene.currSave = this.nextScene;
         }
-        this.nextScene.run();
+        this.nextScene.play();
     }
 }

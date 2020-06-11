@@ -38,7 +38,7 @@ public class DeadEndScene extends Scene{
      * @see Scene
      */
     @Override
-    public void run() {
+    public void play() {
         if (player.getStartScene() != null && this.startCheck == false) {
             Decision backToStart = new Decision("Go back to the start", this.player.getStartScene());
             super.addDecision(backToStart);
@@ -53,6 +53,6 @@ public class DeadEndScene extends Scene{
             this.backToSave.setNextScene(Scene.currSave);
         }
 
-        super.run("You have reached a dead end.");
+        super.play("You have reached a dead end.");
     }
 }

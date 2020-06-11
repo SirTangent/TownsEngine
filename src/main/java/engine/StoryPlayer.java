@@ -35,7 +35,7 @@ public class StoryPlayer {
             throw new IllegalStateException("Error: There is no start scene!");
         }
         this.printInfo();
-        this.startScene.run();
+        this.startScene.play();
     }
 
     /**
@@ -44,7 +44,7 @@ public class StoryPlayer {
      */
     public void playScene(Scene scene){
         this.printInfo();
-        scene.run();
+        scene.play();
     }
 
     /**

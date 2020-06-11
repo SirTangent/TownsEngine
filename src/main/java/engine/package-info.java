@@ -9,6 +9,7 @@ This is the TownsEngine in current form.
  + DeadEndScene - A subclass of Scene, it is a dead end.
 
  - ToolBelt - This class has many useful function used thought the engine.
+ - Playable - This interface must be implemented by all Scene classes.
 
  @author Omar Radwan
  @author Wyatt Phillips

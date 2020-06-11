@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Wyatt Phillips
  * @version 1.0.0
  */
-public class Scene implements Runnable{
+public class Scene implements Playable{
     private Decision[] options = new Decision[10];
     private int optionsPointer = 0;
     protected static Scene currSave = null;
@@ -44,7 +44,7 @@ public class Scene implements Runnable{
      * This method runs and will display stuff and ask for user input.
      */
     @Override
-    public void run() {
+    public void play() {
         if (this.optionsPointer == 0) {
             throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
@@ -60,7 +60,7 @@ public class Scene implements Runnable{
     /**
      * This method runs and will display stuff and ask for user input.
      */
-    protected void run(String text) {
+    protected void play(String text) {
         if (this.optionsPointer == 0) {
             throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
@@ -103,7 +103,7 @@ public class Scene implements Runnable{
             }
         }
         ToolBelt.clearScreen();
-        this.options[number-1].getNextScene().run();
+        this.options[number-1].getNextScene().play();
     }
 
     /**
