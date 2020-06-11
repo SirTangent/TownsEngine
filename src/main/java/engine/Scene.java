@@ -59,6 +59,7 @@ public class Scene implements Playable{
 
     /**
      * This method runs and will display stuff and ask for user input.
+     * @param text A description of the scene that will be printed.
      */
     protected void play(String text) {
         if (this.optionsPointer == 0) {
