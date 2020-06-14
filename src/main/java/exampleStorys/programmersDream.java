@@ -1,5 +1,7 @@
 package exampleStorys;
 import engine.*;
+import engine.gui.Controller;
+import engine.gui.Display;
 
 /**
  * This is my test story to test if my code is working
@@ -9,6 +11,13 @@ import engine.*;
  */
 public class programmersDream {
     public static void main (String[] args){
+        //---TEST---
+        Display display = new Display();
+        Controller control = new Controller(display);
+        Thread test = new Thread(control);
+        test.start();
+        //---TEST---
+
         /*
         WARNING: DONT NOT READ
         jk I dont care
@@ -94,7 +103,6 @@ public class programmersDream {
         makeU.setNextBranch(finallys);
 
         //-------------------------------------------------------------------------
-
         player.playLoop();
     }
 }
