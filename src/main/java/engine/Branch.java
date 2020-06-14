@@ -1,5 +1,7 @@
 package engine;
 
+import engine.gui.Controller;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;

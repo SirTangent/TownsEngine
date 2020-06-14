@@ -12,8 +12,10 @@ import engine.gui.Display;
 public class programmersDream {
     public static void main (String[] args){
         //---TEST---
+        //Testing new stuff comment out if you want code to work like normal
         Display display = new Display();
         Controller control = new Controller(display);
+        display.setController(control);
         Thread test = new Thread(control);
         test.start();
         //---TEST---
