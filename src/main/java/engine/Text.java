@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Text extends Branch{
     private Branch nextBranch;
 
-    public Text(String desc) {
-        super(desc);
+    public Text(String desc, StoryPlayer player) {
+        super(desc, player);
     }
 
-    public Text(String desc, Branch nextBranch) {
-        super(desc);
+    public Text(String desc, StoryPlayer player, Branch nextBranch) {
+        super(desc, player);
         this.nextBranch = nextBranch;
     }
 
@@ -20,16 +20,26 @@ public class Text extends Branch{
             throw new IllegalStateException("Error: can not run text as there is no next branch!");
         }
 
-        Scanner input = new Scanner(System.in);
+        if (super.player.getEnableGUI()){
+            super.player.getControl().sendText(super.desc);
+            super.player.getControl().sendText("");
+            ToolBelt.sleep(2);
 
-        ToolBelt.displayText(this.desc, 70);
-        System.out.println();
-        ToolBelt.sleep(2);
+            super.player.getControl().sendText("Type anything to continue");
+            super.player.getControl().getInput();
+            super.player.getControl().clearScreen();
+        } else {
+            Scanner input = new Scanner(System.in);
 
-        ToolBelt.slowText("Type anything to continue...");
+            ToolBelt.displayText(super.desc, 70);
+            System.out.println();
+            ToolBelt.sleep(2);
 
-        input.next();
-        ToolBelt.clearScreen();
+            ToolBelt.slowText("Type anything to continue...");
+
+            input.next();
+            ToolBelt.clearScreen();
+        }
 
         this.nextBranch.play();
     }

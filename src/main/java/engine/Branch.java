@@ -1,7 +1,5 @@
 package engine;
 
-import engine.gui.Controller;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,25 +11,25 @@ import java.util.Scanner;
  * @version 1.0.0
  */
 public class Branch implements Playable{
-    private ArrayList<Decision> options = new ArrayList<Decision>();
+    private ArrayList<Decision> options = new ArrayList<>();
     protected static Branch currSave = null;
     protected String desc;
+    protected StoryPlayer player;
 
-    public Branch(String desc, Decision[] decisions){
-        this(desc);
-
+    public Branch(String desc, StoryPlayer player, Decision[] decisions){
+        this(desc, player);
         for (Decision temp: decisions) {
             this.addDecision(temp);
         }
     }
 
-    public Branch(String desc, Decision decision){
-        this(desc);
-
+    public Branch(String desc, StoryPlayer player, Decision decision){
+        this(desc, player);
         this.options.add(decision);
     }
 
-    public Branch(String desc){
+    public Branch(String desc, StoryPlayer player){
+        this.player = player;
         this.desc = desc;
     }
 
@@ -43,11 +41,17 @@ public class Branch implements Playable{
         if (this.options.get(0) == null) {
             throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
-
-        ToolBelt.displayText(this.desc, 70);
-        System.out.println();
-        ToolBelt.sleep(2);
-        ToolBelt.slowText("What would you like to do?");
+        if (this.player.getEnableGUI()) {
+            this.player.getControl().sendText(this.desc);
+            this.player.getControl().sendText("");
+            ToolBelt.sleep(2);
+            this.player.getControl().sendText("What would you like to do?");
+        } else {
+            ToolBelt.displayText(this.desc, 70);
+            System.out.println();
+            ToolBelt.sleep(2);
+            ToolBelt.slowText("What would you like to do?");
+        }
 
         displayOptions();
     }
@@ -75,31 +79,59 @@ public class Branch implements Playable{
     private void displayOptions() {
         int count = 1;
         for(Decision temp : this.options){
-            ToolBelt.displayText(count + "|" + temp.getName(), 70);
+            if (this.player.getEnableGUI()){
+                this.player.getControl().sendText(count + "|" + temp.getName());
+            } else {
+                ToolBelt.displayText(count + "|" + temp.getName(), 70);
+            }
             count++;
         }
 
         int number;
-        while(true){
-            System.out.println();
-            System.out.print(">");
+        while(true) {
+            if (this.player.getEnableGUI()) {
+                this.player.getControl().sendText("");
 
-            Scanner input = new Scanner(System.in);
-            try{
-                number = input.nextInt();
+                String input = this.player.getControl().getInput();
 
-                if (number < 1 || number > this.options.size()) {
-                    System.out.print("Error: Not a valid option!");
+                try {
+                    number = Integer.parseInt(input);
+
+                    if (number < 1 || number > this.options.size()) {
+                        this.player.getControl().sendText("Error: Not a valid option!");
+                        ToolBelt.sleep(1);
+                    } else {
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    this.player.getControl().sendText("Error: Must be a number!");
                     ToolBelt.sleep(1);
-                } else {
-                    break;
                 }
-            } catch (InputMismatchException ex) {
-                System.out.print("Error: Must be a number!");
-                ToolBelt.sleep(1);
+            } else {
+                System.out.println();
+                System.out.print(">");
+
+                Scanner input = new Scanner(System.in);
+                try {
+                    number = input.nextInt();
+
+                    if (number < 1 || number > this.options.size()) {
+                        System.out.print("Error: Not a valid option!");
+                        ToolBelt.sleep(1);
+                    } else {
+                        break;
+                    }
+                } catch (InputMismatchException ex) {
+                    System.out.print("Error: Must be a number!");
+                    ToolBelt.sleep(1);
+                }
             }
         }
-        ToolBelt.clearScreen();
+        if(this.player.getEnableGUI()) {
+            this.player.getControl().clearScreen();
+        } else {
+            ToolBelt.clearScreen();
+        }
         this.options.get(number-1).getNextBranch().play();
     }
 
