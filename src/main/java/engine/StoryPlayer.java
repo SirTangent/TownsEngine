@@ -51,10 +51,12 @@ public class StoryPlayer {
             this.enableGUI = true;
     }
 
+    //TODO: Add comment
     public Controller getControl() {
         return this.control;
     }
 
+    //TODO: Add comment
     public Boolean getEnableGUI(){
         return this.enableGUI;
     }
@@ -75,16 +77,21 @@ public class StoryPlayer {
     public Branch getStartBranch(){
         return this.startBranch;
     }
+
+    //TODO: Add comment
     public void setStartBranch(Branch branch) {this.startBranch = branch;}
 
+    //TODO: Add comment
     public String getTitle() {
         return this.title;
     }
 
+    //TODO: Add comment
     public String getAuthor() {
         return this.author;
     }
 
+    //TODO: Add comment
     public String getDesc() {
         return this.desc;
     }
@@ -130,5 +137,4 @@ public class StoryPlayer {
             ToolBelt.clearScreen();
         }
     }
-
 }

@@ -1,4 +1,4 @@
-//TODO: comment this calss and methods
+//TODO: comment this class and methods
 
 package engine.gui;
 
