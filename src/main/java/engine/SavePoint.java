@@ -1,6 +1,5 @@
 package engine;
 
-import javax.tools.Tool;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -40,7 +39,7 @@ public class SavePoint extends Branch {
         if (this.nextBranch == null) {
             throw new IllegalStateException("Error: Can not run scene as nextBranch is null!");
         }
-        int number = 0;
+        int number;
         if (super.player.getEnableGUI()){
             super.player.getControl().sendText(super.desc);
             ToolBelt.sleep(2);

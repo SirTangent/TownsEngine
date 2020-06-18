@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @version 1.0.0
  */
 public class Branch implements Playable{
-    private ArrayList<Decision> options = new ArrayList<>();
+    final private ArrayList<Decision> options = new ArrayList<>();
     protected static Branch currSave = null;
     protected String desc;
     protected StoryPlayer player;

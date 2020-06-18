@@ -14,12 +14,12 @@ import java.util.Queue;
  * @version 1.0.0
  */
 public class Controller implements Runnable{
-    private Queue<String> intake = new LinkedList<>();
+    final private Queue<String> intake = new LinkedList<>();
     private String outtake = null;
     private Boolean lock;
-    private Display display;
+    final private Display display;
     private Boolean screenClear = false;
-    private StoryPlayer player;
+    final private StoryPlayer player;
 
     public Controller(Display display, StoryPlayer player) {
         this.lock = false;

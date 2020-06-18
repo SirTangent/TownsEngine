@@ -9,7 +9,7 @@ package engine;
  */
 public class Decision {
     private Branch nextBranch;
-    private String PrintableName;
+    final private String PrintableName;
 
     public Decision(String name, Branch nextBranch){
         this(name);
@@ -21,8 +21,8 @@ public class Decision {
     }
 
     /**
-     * This method
-     * @return
+     * This method returns the name if the Decision.
+     * @return the name of the decision.
      */
     public String getName(){
         return this.PrintableName;

@@ -42,7 +42,7 @@ This class is a general class with useful function that can be used.
             }
         }
 
-        if (newLine == true) {
+        if (newLine) {
             System.out.println();
         }
     }
@@ -106,7 +106,7 @@ This class is a general class with useful function that can be used.
                 for (int i = lineLength; i > 0; i--) {
                     if (text.charAt(i) == ' ') {
                         ToolBelt.slowText(text.substring(0, i));
-                        text = text.substring(i + 1, text.length());
+                        text = text.substring(i + 1);
                         break;
                     }
                 }
