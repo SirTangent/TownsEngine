@@ -1,5 +1,3 @@
-//TODO: comment this class and methods
-
 package engine.gui;
 
 import javafx.animation.KeyFrame;
@@ -17,11 +15,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
+/**
+ *This is the gui for the engine. this can be used to display stuff ina  nice window instead of the terminal.
+ *
+ * @author Omar Radwan
+ * @version 1.0.0
+ */
 public class Display extends Application {
     public static Controller currControl = null;
     private Controller control;
@@ -34,10 +37,17 @@ public class Display extends Application {
     public Display() {
     }
 
+    /**
+     * This launches the Stage.
+     */
     public void appLaunch(){
         launch();
     }
 
+    /**
+     * This is the actually scene that gets displayed on the screen.
+     * @param primaryStage - The default stage.
+     */
     public void start (Stage primaryStage){
         this.xNum = 500;
         this.yNum = 700;
@@ -78,6 +88,9 @@ public class Display extends Application {
 
         this.output.setStyle("-fx-font-size: 18; -fx-font-family: monospace");
 
+        /**
+         * This timeline does the update and checks the controller for anything new
+         */
         final Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(100), new EventHandler() {
                     private Boolean lock = false;
@@ -148,6 +161,14 @@ public class Display extends Application {
         });
     }
 
+    /**
+     * this class will check the controller for anything new and update the screen accordingly and nicely.
+     * The display is a variation on how ToolBelt displays and also implements Runnable.
+     * @see java.lang.Runnable
+     *
+     * @author Omar Radwan
+     * @version 1.0.0
+     */
     private class Update implements Runnable{
         private Controller control;
         private TextArea output;
@@ -156,6 +177,9 @@ public class Display extends Application {
             this.output = output;
         }
 
+        /**
+         * This method checks the controller for any updates
+         */
         private void update() {
             if(this.control.getClearScreen()){
                 this.output.setText("");
@@ -177,6 +201,11 @@ public class Display extends Application {
             //System.out.println(this.toString() + ": Finished update");
         }
 
+        /**
+         * This method will display text onto the screen nicely.
+         * @param text The String to be displayed.
+         * @param lineLength how many char the line will be at most.
+         */
         public void displayText(String text, int lineLength) {
             Boolean flag = false;
             while (true) {
@@ -201,6 +230,10 @@ public class Display extends Application {
             }
         }
 
+        /**
+         * This method print the sting char by char so it looks nice and then it prints a new line.
+         * @param text the text to be printed out char by char.
+         */
         public void slowText(String text) {
             for (int i = 0; i < text.length(); i++) {
                 this.output.appendText(String.valueOf(text.charAt(i)));
@@ -213,6 +246,9 @@ public class Display extends Application {
             this.output.appendText( "\n");
         }
 
+        /**
+         * This overrides the run method from runnable.
+         */
         @Override
         public void run() {
             update();

@@ -20,7 +20,10 @@ public class Decision {
         this.PrintableName = name;
     }
 
-    //TODO: Add comment
+    /**
+     * This method
+     * @return
+     */
     public String getName(){
         return this.PrintableName;
     }

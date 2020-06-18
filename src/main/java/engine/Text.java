@@ -1,8 +1,15 @@
-//TODO: comment class and methods
 package engine;
 
 import java.util.Scanner;
 
+/**
+ * This class is for displaying text without a decision. It is just prints out the text and then pauses.
+ * This is is a subclass of Branch.
+ * @see engine.Branch
+ *
+ * @author Omar Radwan
+ * @version 1.0.0
+ */
 public class Text extends Branch{
     private Branch nextBranch;
 
@@ -15,6 +22,10 @@ public class Text extends Branch{
         this.nextBranch = nextBranch;
     }
 
+    /**
+     * This method plays the instance and displays text in either terminal or GUI
+     * This method over rides the Branch play method
+     */
     @Override
     public void play() {
         if (this.nextBranch == null){
@@ -45,6 +56,10 @@ public class Text extends Branch{
         this.nextBranch.play();
     }
 
+    /**
+     * This method sets the next branch to goto
+     * @param nextBranch A branch or any subclass of branch to be set as next.
+     */
     public void setNextBranch(Branch nextBranch) {
         this.nextBranch = nextBranch;
     }

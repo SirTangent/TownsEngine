@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
- * This class can run a single scene. It will print out the desc and then all the options. You can only have upto 10 options in a given scene.
+ * This class can run a single scene. It will print out the desc and then all the options.
+ * This class implements playable
+ * @see engine.Playable
  *
  * @author Omar Radwan
  * @author Wyatt Phillips

@@ -43,7 +43,10 @@ public class StoryPlayer {
         this.startBranch.play();
     }
 
-    //TODO: Add comment
+    /**
+     * This method sets everything so the gui can be used. You must have JavaFX installed for it to work.
+     * @see javafx
+     */
     public void enableGUI(){
             this.control = new Controller(new Display(), this);
             Thread gui = new Thread(this.control);
@@ -51,12 +54,18 @@ public class StoryPlayer {
             this.enableGUI = true;
     }
 
-    //TODO: Add comment
+    /**
+     * this method get the controller that the player class is currently using.
+     * @return the controller that the class is using.
+     */
     public Controller getControl() {
         return this.control;
     }
 
-    //TODO: Add comment
+    /**
+     * this method check to see if the gui is enabled or not.
+     * @return true is the story is using a gui and false if not.
+     */
     public Boolean getEnableGUI(){
         return this.enableGUI;
     }
@@ -71,27 +80,39 @@ public class StoryPlayer {
     }
 
     /**
-     * This method gets the StartScene.
+     * This method gets the StartBranch.
      * @return the startBranch scene.
      */
     public Branch getStartBranch(){
         return this.startBranch;
     }
 
-    //TODO: Add comment
+    /**
+     * This method sets the StartBranch.
+     * @param branch the branch you want to be the start branch.
+     */
     public void setStartBranch(Branch branch) {this.startBranch = branch;}
 
-    //TODO: Add comment
+    /**
+     * This method gets the title of the story.
+     * @return the title.
+     */
     public String getTitle() {
         return this.title;
     }
 
-    //TODO: Add comment
+    /**
+     * This method gets the author of the story.
+     * @return the author if the story.
+     */
     public String getAuthor() {
         return this.author;
     }
 
-    //TODO: Add comment
+    /**
+     * This method gets the description of the story
+     * @return the description of the story
+     */
     public String getDesc() {
         return this.desc;
     }
