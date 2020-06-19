@@ -9,15 +9,13 @@ package engine;
  * @version 1.0.1
  */
 public class DeadEndBranch extends Branch {
-    private StoryPlayer player = null;
     private boolean startCheck = false;
     private boolean saveCheck = false;
-    private Decision backToSave = new Decision("Go back to last Save", Branch.currSave);
+    final private Decision backToSave = new Decision("Go back to last Save", Branch.currSave);
     public DeadEndBranch(String desc, Branch prevBranch, StoryPlayer player) {
-        super(desc);
-        this.player = player;
+        super(desc, player);
 
-        if (this.player.getStartBranch() != null && !this.startCheck) {
+        if (super.player.getStartBranch() != null && !this.startCheck) {
             Decision backToStart = new Decision("Go back to the start", this.player.getStartBranch());
             super.addDecision(backToStart);
             this.startCheck = true;
@@ -39,13 +37,13 @@ public class DeadEndBranch extends Branch {
      */
     @Override
     public void play() {
-        if (player.getStartBranch() != null && this.startCheck == false) {
-            Decision backToStart = new Decision("Go back to the start", this.player.getStartBranch());
+        if (super.player.getStartBranch() != null && !this.startCheck) {
+            Decision backToStart = new Decision("Go back to the start", super.player.getStartBranch());
             super.addDecision(backToStart);
             this.startCheck = true;
         }
 
-        if (Branch.currSave != null && this.saveCheck == false) {
+        if (Branch.currSave != null && !this.saveCheck) {
             super.addDecision(this.backToSave);
             this.saveCheck = true;
         }

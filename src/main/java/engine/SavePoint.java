@@ -13,13 +13,13 @@ import java.util.Scanner;
  */
 public class SavePoint extends Branch {
     private Branch nextBranch;
-    public SavePoint(String desc, Branch nextBranch) {
-        super(desc);
+    public SavePoint(String desc, StoryPlayer player, Branch nextBranch) {
+        super(desc, player);
         this.setNextBranch(nextBranch);
     }
 
-    public SavePoint(String desc) {
-        super(desc);
+    public SavePoint(String desc, StoryPlayer player) {
+        super(desc, player);
     }
 
     /**
@@ -39,39 +39,69 @@ public class SavePoint extends Branch {
         if (this.nextBranch == null) {
             throw new IllegalStateException("Error: Can not run scene as nextBranch is null!");
         }
-        ToolBelt.displayText(super.desc, 70);
-        System.out.println();
-        ToolBelt.sleep(2);
+        int number;
+        if (super.player.getEnableGUI()){
+            super.player.getControl().sendText(super.desc);
+            ToolBelt.sleep(2);
+            super.player.getControl().sendText("");
 
-        ToolBelt.slowText("Would you like to save?");
-        ToolBelt.slowText("1|Yes");
-        ToolBelt.slowText("2|No");
+            super.player.getControl().sendText("Would you like to save?");
+            super.player.getControl().sendText("1|Yes");
+            super.player.getControl().sendText("2|No");
 
-        int number = 0;
-        while(true){
-            System.out.println();
-            System.out.print(">");
+            while (true) {
+                super.player.getControl().sendText("");
 
-            Scanner input = new Scanner(System.in);
-            try{
-                number = input.nextInt();
+                String input = super.player.getControl().getInput();
 
-                if (number < 1 || number > 2) {
-                    System.out.print("Error: Not a valid option!");
+                try {
+                    number = Integer.parseInt(input);
+
+                    if (number < 1 || number > 2) {
+                        super.player.getControl().sendText("Error: Not a valid option!");
+                        ToolBelt.sleep(1);
+                    } else {
+                        break;
+                    }
+                }catch (NumberFormatException e){
+                    super.player.getControl().sendText("Error: Must be a number!");
                     ToolBelt.sleep(1);
-                } else {
-                    break;
                 }
-            } catch (InputMismatchException ex) {
-                System.out.print("Error: Must be a number!");
-                ToolBelt.sleep(1);
             }
-        }
-        ToolBelt.clearScreen();
+            super.player.getControl().clearScreen();
+        } else {
+            ToolBelt.displayText(super.desc, 70);
+            System.out.println();
+            ToolBelt.sleep(2);
 
-        if (number == 1) {
-            Branch.currSave = this.nextBranch;
+            ToolBelt.slowText("Would you like to save?");
+            ToolBelt.slowText("1|Yes");
+            ToolBelt.slowText("2|No");
+
+            while (true) {
+                System.out.println();
+                System.out.print(">");
+
+                Scanner input = new Scanner(System.in);
+                try {
+                    number = input.nextInt();
+
+                    if (number < 1 || number > 2) {
+                        System.out.print("Error: Not a valid option!");
+                        ToolBelt.sleep(1);
+                    } else {
+                        break;
+                    }
+                } catch (InputMismatchException ex) {
+                    System.out.print("Error: Must be a number!");
+                    ToolBelt.sleep(1);
+                }
+            }
+            ToolBelt.clearScreen();
         }
-        this.nextBranch.play();
+            if (number == 1) {
+                Branch.currSave = this.nextBranch;
+            }
+            this.nextBranch.play();
     }
 }
