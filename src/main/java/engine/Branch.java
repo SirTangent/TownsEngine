@@ -67,11 +67,18 @@ public class Branch implements Playable{
             throw new IllegalStateException("Error: Can not run a scene that has no options!");
         }
 
-        ToolBelt.displayText(this.desc, 70);
-        System.out.println();
-        ToolBelt.sleep(2);
-        ToolBelt.slowText(text);
+        if (this.player.getEnableGUI()) {
+            this.player.getControl().sendText(this.desc);
+            this.player.getControl().sendText("");
+            ToolBelt.sleep(2);
+            this.player.getControl().sendText(this.desc);
+        } else {
+            ToolBelt.displayText(this.desc, 70);
+            System.out.println();
+            ToolBelt.sleep(2);
+            ToolBelt.slowText(text);
 
+        }
         displayOptions();
     }
 

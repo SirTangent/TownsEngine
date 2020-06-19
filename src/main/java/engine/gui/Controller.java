@@ -1,5 +1,6 @@
 package engine.gui;
 
+import engine.Debug;
 import engine.StoryPlayer;
 
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ public class Controller implements Runnable{
     final private Display display;
     private Boolean screenClear = false;
     final private StoryPlayer player;
+    final private Debug debug = new Debug();
 
     public Controller(Display display, StoryPlayer player) {
         this.lock = false;
@@ -41,7 +43,7 @@ public class Controller implements Runnable{
      * @param text the string to be added.
      */
     public void sendText(String text){
-        //System.out.println("Control: added: " + text);
+        this.getDebug().printDebug("control: Added \"" + text + "\"");
         this.intake.add(text);
     }
 
@@ -56,7 +58,8 @@ public class Controller implements Runnable{
         while (this.outtake == null){
             System.out.print("");
         }
-        //System.out.println("Control: returning text " + this.outtake);
+
+        this.getDebug().printDebug("Control: Returning text \"" + this.outtake + "\"");
 
         String temp = this.outtake;
         this.outtake = null;
@@ -67,6 +70,7 @@ public class Controller implements Runnable{
      * This method will send a clearScreen to the GUI.
      */
     public void clearScreen(){
+        this.getDebug().printDebug("Control: Clear screen request received");
         setClearScreen(true);
     }
 
@@ -83,7 +87,7 @@ public class Controller implements Runnable{
      * @param val a boolean for clear screen request.
      */
     void setClearScreen(Boolean val){
-        //System.out.println("Control: set clearScreen value to " + val);
+        this.getDebug().printDebug("Control set clear screen value to " + val);
         this.screenClear = val;
     }
 
@@ -93,11 +97,11 @@ public class Controller implements Runnable{
      */
     String grabText() {
         if (peekText() == null){
-            //System.out.println("Control: removed: null");
+            this.getDebug().printDebug("Control: Removed null");
             return null;
         }
 
-        //System.out.println("Control: removed: " + peekText());
+        this.getDebug().printDebug("Control: Removed \"" + peekText() + "\"");
         return this.intake.remove();
     }
 
@@ -116,7 +120,7 @@ public class Controller implements Runnable{
      */
     void setInput(String text) {
         if (!lock) {
-            //System.out.println("Control: output text set to " + text);
+            this.getDebug().printDebug("Control: Output text set to \"" + text + "\"");
             this.outtake = text;
         }
     }
@@ -126,7 +130,7 @@ public class Controller implements Runnable{
      * @param lock The status of the lock you want to set.
      */
     void setLock(Boolean lock){
-        //System.out.println("Control: Lock was set to " + lock);
+        this.getDebug().printDebug("Control: Lock was set to " + lock);
         this.lock = lock;
     }
 
@@ -136,5 +140,13 @@ public class Controller implements Runnable{
      */
     StoryPlayer getPlayer() {
         return this.player;
+    }
+
+    /**
+     * This will return the debugger used byt the program.
+     * @return the debugger used my the program so you can send the debugger things.
+     */
+    public Debug getDebug() {
+        return this.debug;
     }
 }

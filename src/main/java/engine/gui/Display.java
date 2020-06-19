@@ -1,4 +1,3 @@
-//TODO: Fix all the warning that intelliJ is giving me
 package engine.gui;
 
 import javafx.animation.KeyFrame;
@@ -29,10 +28,7 @@ import javafx.util.Duration;
 public class Display extends Application {
     public static Controller currControl = null;
     private Controller control;
-    private TextArea output;
     public static Update update;
-    private int xNum;
-    private int yNum;
 
 
     public Display() {
@@ -50,29 +46,32 @@ public class Display extends Application {
      * @param primaryStage - The default stage.
      */
     public void start (Stage primaryStage){
-        this.xNum = 500;
-        this.yNum = 700;
+        TextArea output;
+        int xNum;
+        int yNum;
+        xNum = 500;
+        yNum = 700;
 
-        this.output = new TextArea("");
-        this.output.setEditable(false);
+        output = new TextArea("");
+        output.setEditable(false);
         this.control = Display.currControl;
-        Display.update = new Update(this.control, this.output);
+        Display.update = new Update(this.control, output);
         Display.currControl = null;
 
         TextArea input = new TextArea();
-        input.setMinHeight(this.yNum/15.0);
-        input.setMinWidth((this.xNum/8.0) * 7);
-        input.setMaxHeight(this.yNum/15.0);
-        input.setMaxWidth((this.xNum/8.0) * 7);
+        input.setMinHeight(yNum/15.0);
+        input.setMinWidth((xNum/8.0) * 7);
+        input.setMaxHeight(yNum/15.0);
+        input.setMaxWidth((xNum/8.0) * 7);
         input.setScrollTop(0);
 
         input.setStyle("-fx-font-size: 25; -fx-font-family: monospace");
 
         Button enter = new Button("Enter");
-        enter.setMinHeight(this.yNum/15.0);
-        enter.setMinWidth(this.xNum/8.0);
-        enter.setMaxHeight(this.yNum/15.0);
-        enter.setMaxWidth(this.xNum/8.0);
+        enter.setMinHeight(yNum/15.0);
+        enter.setMinWidth(xNum/8.0);
+        enter.setMaxHeight(yNum/15.0);
+        enter.setMaxWidth(xNum/8.0);
 
         enter.setStyle("-fx-font-size: 14; -fx-font-family: monospace");
 
@@ -82,21 +81,20 @@ public class Display extends Application {
         inputSys.getChildren().add(enter);
         inputSys.setPadding(new Insets(15,0,0,0));
 
-        this.output.setMinWidth(this.xNum);
-        this.output.setMinHeight((this.yNum/15) * 14);
-        this.output.setMaxWidth(this.xNum);
-        this.output.setMaxHeight((this.yNum/15) * 14);
+        output.setMinWidth(xNum);
+        output.setMinHeight((yNum/15.0) * 14);
+        output.setMaxWidth(xNum);
+        output.setMaxHeight((yNum/15.0) * 14);
 
-        this.output.setStyle("-fx-font-size: 18; -fx-font-family: monospace");
+        output.setStyle("-fx-font-size: 18; -fx-font-family: monospace");
 
-        /**
+        /*
          * This timeline does the update and checks the controller for anything new
          */
         final Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(100), new EventHandler() {
-                    private Boolean lock = false;
                     private Thread temp = null;
-                    private Update update = Display.update;
+                    private final Update update = Display.update;
                     private Boolean checkFlag = false;
                     @Override
                     public void handle(Event event) {
@@ -106,16 +104,13 @@ public class Display extends Application {
                         }
 
                         if (temp == null) {
-                            //System.out.println("Timeline: thread is null; creating new thread...");
+                            update.getControl().getDebug().printDebug("Timeline: Thread is null; creating new thread");
                             temp = new Thread(update);
-
-                            //System.out.println("Timeline: staring thread..");
+                            update.getControl().getDebug().printDebug("Timeline: Starting thread...");
                             temp.start();
                         } else {
-                            if (temp.isAlive()) {
-                                //System.out.println("Timeline: Thread is still alive");
-                            } else {
-                                //System.out.println("Timeline: Thread is dead; setting temp to null");
+                            if (!temp.isAlive()) {
+                                update.getControl().getDebug().printDebug("Timeline: Thread is dead;setting temp to null");
                                 temp = null;
                             }
                         }
@@ -126,14 +121,14 @@ public class Display extends Application {
         timeline.play();
 
         enter.setOnAction((ActionEvent e) -> {
-            //System.out.println("GUI: Button was pressed");
+            this.control.getDebug().printDebug("GUI: Button was pressed");
             this.control.setInput(input.getText().trim());
             input.setText("");
         });
 
         input.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER){
-                //System.out.println("GUI: Enter was pressed");
+                this.control.getDebug().printDebug("GUI: Enter was pressed");
                 this.control.setInput(input.getText().trim());
                 input.setText("");
             }
@@ -141,24 +136,21 @@ public class Display extends Application {
 
         VBox all = new VBox();
         all.setAlignment(Pos.CENTER);
-        all.getChildren().add(this.output);
+        all.getChildren().add(output);
         all.getChildren().add(inputSys);
 
         StackPane root = new StackPane();
         root.getChildren().add(all);
 
-        Scene scene = new Scene(root, this.xNum, this.yNum);
+        Scene scene = new Scene(root, xNum, yNum);
         primaryStage.setScene(scene);
         primaryStage.setTitle(this.control.getPlayer().getTitle() + " by: " + this.control.getPlayer().getAuthor());
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                //System.out.print("!-!-PROGRAM-!-!: Program has been terminated");
+        primaryStage.setOnCloseRequest((WindowEvent e) -> {
+                this.control.getDebug().printDebug("!-!-PROGRAM-!-!: Program has been terminated");
                 System.exit(0);
-            }
         });
     }
 
@@ -170,9 +162,9 @@ public class Display extends Application {
      * @author Omar Radwan
      * @version 1.0.0
      */
-    private class Update implements Runnable{
-        private Controller control;
-        private TextArea output;
+    private static class Update implements Runnable{
+        final private Controller control;
+        final private TextArea output;
         private Update(Controller control, TextArea output){
             this.control = control;
             this.output = output;
@@ -187,9 +179,9 @@ public class Display extends Application {
                 this.control.setClearScreen(false);
                 return;
             }
-            //System.out.println(this.toString() + ": Checking update");
+            control.getDebug().printDebug("Checking update", this);
             if (this.control.peekText() != null) {
-                //System.out.println(this.toString() + ": Found new text! printing...");
+                control.getDebug().printDebug("Found new text! printing...", this);
                 this.control.setLock(true);
                 String text = this.control.grabText();
                 int lineLength = 44;
@@ -199,7 +191,7 @@ public class Display extends Application {
 
             this.control.setLock(false);
 
-            //System.out.println(this.toString() + ": Finished update");
+            control.getDebug().printDebug("Finished update", this);
         }
 
         /**
@@ -208,7 +200,7 @@ public class Display extends Application {
          * @param lineLength how many char the line will be at most.
          */
         public void displayText(String text, int lineLength) {
-            Boolean flag = false;
+            boolean flag = false;
             while (true) {
                 if (text.length() > lineLength) {
                     for (int i = lineLength; i > 0; i--) {
@@ -253,6 +245,10 @@ public class Display extends Application {
         @Override
         public void run() {
             update();
+        }
+
+        public Controller getControl(){
+            return this.control;
         }
     }
 }

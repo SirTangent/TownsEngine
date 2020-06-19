@@ -118,6 +118,13 @@ public class StoryPlayer {
     }
 
     /**
+     * This class enables debug.
+     */
+    public void enableDebug(){
+        this.getControl().getDebug().enableDebug();
+    }
+
+    /**
      * This class prints out Engine info and Story info.
      */
     private void printInfo(){
