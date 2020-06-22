@@ -20,16 +20,19 @@ public class StoryPlayer {
     private Boolean enableGUI = false;
 
     public StoryPlayer(String title, String desc,String author, Branch startBranch){
+        this(title, desc, author);
         this.startBranch = startBranch;
-        this.title = title;
-        this.author = author;
-        this.desc = desc;
     }
 
     public StoryPlayer(String title, String desc,String author){
         this.title = title;
         this.author = author;
         this.desc = desc;
+
+        this.control = new Controller(new Display(), this);
+        Thread gui = new Thread(this.control);
+        gui.start();
+        this.enableGUI = true;
     }
 
     /**
@@ -47,11 +50,9 @@ public class StoryPlayer {
      * This method sets everything so the gui can be used. You must have JavaFX installed for it to work.
      * @see javafx
      */
-    public void enableGUI(){
-            this.control = new Controller(new Display(), this);
-            Thread gui = new Thread(this.control);
-            gui.start();
-            this.enableGUI = true;
+    public void disableGUI(){
+            this.control = null;
+            this.enableGUI = false;
     }
 
     /**
