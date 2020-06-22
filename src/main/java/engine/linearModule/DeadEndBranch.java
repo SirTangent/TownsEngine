@@ -1,4 +1,4 @@
-package engine;
+package engine.linearModule;
 
 /**
  * This class is a subclass of Branch. This acts as a dead end in the story.

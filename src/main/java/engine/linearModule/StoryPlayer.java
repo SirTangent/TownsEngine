@@ -1,7 +1,7 @@
-package engine;
+package engine.linearModule;
 
-import engine.gui.Controller;
-import engine.gui.Display;
+import engine.linearModule.gui.Controller;
+import engine.linearModule.gui.Display;
 
 import java.util.Scanner;
 /**

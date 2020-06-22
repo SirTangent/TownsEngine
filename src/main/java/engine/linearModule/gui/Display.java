@@ -1,4 +1,4 @@
-package engine.gui;
+package engine.linearModule.gui;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

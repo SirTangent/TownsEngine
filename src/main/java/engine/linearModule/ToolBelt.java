@@ -1,4 +1,4 @@
-package engine;
+package engine.linearModule;
 
 /**
 This class is a general class with useful function that can be used.

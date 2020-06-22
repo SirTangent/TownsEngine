@@ -1,7 +1,7 @@
-package engine.gui;
+package engine.linearModule.gui;
 
-import engine.Debug;
-import engine.StoryPlayer;
+import engine.linearModule.Debug;
+import engine.linearModule.StoryPlayer;
 
 import java.util.LinkedList;
 import java.util.Queue;

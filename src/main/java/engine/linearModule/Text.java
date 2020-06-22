@@ -1,11 +1,11 @@
-package engine;
+package engine.linearModule;
 
 import java.util.Scanner;
 
 /**
  * This class is for displaying text without a decision. It is just prints out the text and then pauses.
  * This is is a subclass of Branch.
- * @see engine.Branch
+ * @see engine.linearModule.Branch
  *
  * @author Omar Radwan
  * @version 1.0.0

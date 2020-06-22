@@ -1,4 +1,4 @@
-package engine;
+package engine.linearModule;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

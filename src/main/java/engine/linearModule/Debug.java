@@ -1,4 +1,4 @@
-package engine;
+package engine.linearModule;
 
 /**
  * This class is used for debug so instead of commenting out the prints to console, you can just run the program with debug enabled.

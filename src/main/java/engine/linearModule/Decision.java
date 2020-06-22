@@ -1,4 +1,4 @@
-package engine;
+package engine.linearModule;
 
 /**
  * This is the engine's Decision class. It is used when you want to make a decision in a scene.
