@@ -1,7 +1,6 @@
 package exampleStorys;
-import engine.*;
 
-import java.lang.invoke.SwitchPoint;
+import engine.linearModule.*;
 
 /**
  * This is my test story to test if my code is working
@@ -16,7 +15,6 @@ public class programmersDream {
         jk I dont care
          */
         StoryPlayer player = new StoryPlayer( "Programmers' Masterpiece","Get ready for a ride cus this is the story I used to check my code and make sure it was working. Hold onto your fucking hats cus if this makes any sense your fucking lucky. Maybe grab a drink or teo before starting just to get though it. Good luck","Omar Radwan");
-        player.enableGUI();
 
         for ( String val: args) {
             switch(val){
